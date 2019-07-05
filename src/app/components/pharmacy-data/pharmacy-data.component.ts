@@ -1,6 +1,6 @@
-import { BuscadorFormComponent } from './../buscador-form/buscador-form.component';
 import { Component, OnInit } from '@angular/core';
 import { FarmaciasService } from './../../services/farmacias.service';
+import { MapService } from './../../services/map.service';
 import { Result } from '../../services/models';
 
 interface Datos {
@@ -28,7 +28,8 @@ export class PharmacyDataComponent implements OnInit {
   totalrows: string = '25';
   fecha: string;
 
-  constructor(private farmaciasService: FarmaciasService) { }
+  constructor(private farmaciasService: FarmaciasService,
+    private mapService: MapService) { }
 
   ngOnInit(): void {
     this.load();
@@ -80,9 +81,8 @@ export class PharmacyDataComponent implements OnInit {
    * Muestra elementos seleccionados en el mapa
    */
   mostrar() {
-    this.selected.forEach(element => {
-      console.log(element.title);
-    });
+    this.mapService.setSelected(this.selected);
+    this.mapService.changeMessage('1');
   }
 
 }

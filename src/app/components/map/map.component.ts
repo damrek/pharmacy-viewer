@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { latLng, Layer, marker, icon, tileLayer } from 'leaflet';
 import { FarmaciasService } from './../../services/farmacias.service';
+import { MapService } from 'src/app/services/map.service';
+import { Result } from 'src/app/services/models';
 
 @Component({
   selector: 'app-map',
@@ -9,11 +11,12 @@ import { FarmaciasService } from './../../services/farmacias.service';
   providers: [FarmaciasService]
 })
 export class MapComponent implements OnInit {
-  @Input() lstFarmacias: Array<Object> = [];
+  lstFarmacias: Array<Result> = [];
   markers: Layer[] = [];
   total: number;
 
-  constructor(private farmaciasService: FarmaciasService) { }
+  constructor(private farmaciasService: FarmaciasService,
+    private mapService: MapService) { }
 
   streetMaps = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     detectRetina: true,
@@ -49,34 +52,45 @@ export class MapComponent implements OnInit {
     }, 0);
 
     map.on('click', <LeafletMouseEvent>(e) => { console.log(e.latlng) });
-
   }
 
   cargarFarmacias(): void {
     this.markers = [];
-    this.lstFarmacias.map((a: any = {}) => {
-      if (a.geometry !== undefined) {
-        var lng = a.geometry.coordinates[0];
-        var lat = a.geometry.coordinates[1];
+    this.lstFarmacias = this.mapService.getSelected();
+    this.lstFarmacias.map((f: Result) => {
+      if (f.geometry !== undefined) {
+        let lng = f.geometry.coordinates[0];
+        let lat = f.geometry.coordinates[1];
+        let iconurl = 'assets/pharmacy_icon.png';
+        if (f.guardia !== undefined) {
+          iconurl = 'assets/pharmacyg_icon.png';
+        }
         const newMarker = marker(
           [lat, lng],
           {
             icon: icon({
               iconSize: [25, 41],
               iconAnchor: [13, 41],
-              iconUrl: 'assets/pharmacy_icon.png',
+              iconUrl: iconurl,
               shadowUrl: 'leaflet/marker-shadow.png'
             })
           }
         );
-        newMarker.bindPopup('<p>' + JSON.stringify(a) + '</p>', { autoPan: true });
+        newMarker.bindPopup('<p>' + JSON.stringify(f) + '</p>', { autoPan: true });
         this.markers.push(newMarker);
       }
     });
-    console.log(this.markers);
+    // console.log(this.markers);
+  }
+
+  limpiarFarmacias() {
+    this.lstFarmacias = [];
+    this.mapService.setSelected(this.lstFarmacias);
+    this.cargarFarmacias();
   }
 
   ngOnInit(): void {
+    this.mapService.currentMessage.subscribe(currentData => this.cargarFarmacias());
   }
 
 }

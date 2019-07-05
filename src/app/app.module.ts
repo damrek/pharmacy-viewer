@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { PharmacyDataComponent } from './components/pharmacy-data/pharmacy-data.component';
 import { BuscadorFormComponent } from './components/buscador-form/buscador-form.component';
+import { MapService } from './services/map.service';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { BuscadorFormComponent } from './components/buscador-form/buscador-form.
     LeafletModule.forRoot(),
     HttpClientModule
   ],
-  providers: [],
+  providers: [MapService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
