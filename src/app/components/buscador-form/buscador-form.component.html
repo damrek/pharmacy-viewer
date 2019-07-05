@@ -1,0 +1,33 @@
+<h3 id="farmacias"><clr-icon shape="cog" size="36"></clr-icon> Opciones de búsqueda</h3>
+<form novalidate clrForm [formGroup]="form" (ngSubmit)="submit()" class="clr-form clr-form-horizontal">
+  <clr-input-container>
+    <label>Nombre contiene:</label>
+    <input clrInput type="text" formControlName="title" />
+  </clr-input-container>
+  <clr-radio-container clrInline>
+    <label>Tipo de farmacia:</label>
+    <clr-radio-wrapper>
+      <input type="radio" clrRadio value="guardia" formControlName="tipo" />
+      <label>De guardia</label>
+    </clr-radio-wrapper>
+    <clr-radio-wrapper>
+      <input type="radio" clrRadio value="todos" formControlName="tipo" [checked]="true" />
+      <label>Todas</label>
+    </clr-radio-wrapper>
+  </clr-radio-container>
+
+  <input *ngIf="getTipo()=='guardia'" type="date" formControlName="fecha" clrDate>
+
+  <clr-select-container>
+    <label>Max. registros:</label>
+    <div class="clr-select-wrapper">
+    </div>
+    <select clrSelect formControlName="registros" class="clr-select">
+      <option value="20">20</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+      <option value="9999">Todos</option>
+    </select>
+  </clr-select-container>
+  <button class="btn btn-sm btn-success-outline">Buscar</button>
+</form>

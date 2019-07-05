@@ -1,0 +1,47 @@
+<app-buscador-form (datos)="onSubmit($event)"></app-buscador-form>
+
+<clr-modal class="modal fadeDown in" [(clrModalOpen)]="infoFarmacia">
+  <h3 class="modal-title"><clr-icon shape="help-info" class="is-solid" size="36"></clr-icon>{{ infoFarmaciaSelected?.id }}: {{ infoFarmaciaSelected?.title }}</h3>
+  <div class="modal-body">
+    <ul class="list compact">
+      <li><strong>Teléfonos:</strong> {{ infoFarmaciaSelected?.telefonos }}</li>
+      <li><strong>Horario:</strong> {{ infoFarmaciaSelected?.horario }}</li>
+      <li><strong>Clasificación:</strong> {{ infoFarmaciaSelected?.clasificacion }}</li>
+      <li><strong>Servicios:</strong> {{ infoFarmaciaSelected?.servicios }}</li>
+      <li><strong>Calle:</strong> {{ infoFarmaciaSelected?.calle }}</li>
+      <li><strong>Localización:</strong> {{ infoFarmaciaSelected?.geometry.coordinates }}</li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline" (click)="infoFarmacia = false"type="button">Cerrar</button>
+    <button class="btn btn-primary" type="button">Localizar</button>
+  </div>
+</clr-modal>
+<div class="modal-backdrop" aria-hidden="true" *ngIf="infoFarmacia"></div>
+
+<span>
+  <h3 id="farmacias"><clr-icon shape="list" size="36"></clr-icon> Lista de farmacias</h3><button
+    [className]="selected.length > 0 ? 'btn btn-primary btn-sm' : 'btn btn-primary btn-sm disabled'"
+    (click)="mostrar()">Mostrar en el mapa</button>
+</span>
+<clr-datagrid [(clrDgSelected)]="selected" [clrDgLoading]="loading">
+  <clr-dg-column>F.Guardia</clr-dg-column>
+  <clr-dg-column [clrDgField]="'title'">Nombre</clr-dg-column>
+  <clr-dg-column [clrDgField]="'calle'">Calle</clr-dg-column>
+  <clr-dg-column>Información</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let farma of lstFarmacias" [clrDgItem]="farma">
+    <clr-dg-cell>{{farma?.guardia?.fecha | date }}</clr-dg-cell>
+    <clr-dg-cell>{{farma.title.substring(9) }}</clr-dg-cell>
+    <clr-dg-cell>{{farma.calle }}</clr-dg-cell>
+    <clr-dg-cell><a href="#" (click)="verInfoFarmacia(farma.id)">Ver más</a></clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      <clr-dg-page-size [clrPageSizeOptions]="[5,10,15,30]">Farmacias por página</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+      de {{pagination.totalItems}} farmacias
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
