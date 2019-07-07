@@ -1,8 +1,14 @@
-<h3 id="farmacias"><clr-icon shape="cog" size="36"></clr-icon> Opciones de búsqueda</h3>
+<h3 id="farmacias">
+  <clr-icon shape="cog" size="36"></clr-icon> Opciones de búsqueda
+</h3>
 <form novalidate clrForm [formGroup]="form" (ngSubmit)="submit()" class="clr-form clr-form-horizontal">
   <clr-input-container>
     <label>Nombre contiene:</label>
     <input clrInput type="text" formControlName="title" />
+  </clr-input-container>
+  <clr-input-container>
+    <label>Calle contiene:</label>
+    <input clrInput type="text" formControlName="calle" />
   </clr-input-container>
   <clr-radio-container clrInline>
     <label>Tipo de farmacia:</label>

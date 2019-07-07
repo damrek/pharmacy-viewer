@@ -6,6 +6,7 @@ interface Datos {
   tipo: string;
   registros: string;
   fecha: string;
+  calle: string;
 }
 
 @Component({
@@ -23,7 +24,8 @@ export class BuscadorFormComponent {
       title: [''],
       tipo: [''],
       registros: [''],
-      fecha: ['']
+      fecha: [''],
+      calle: ['']
     });
 
   }
@@ -39,6 +41,7 @@ export class BuscadorFormComponent {
       }
       values.registros = this.form.value.registros;
       values.fecha = this.form.value.fecha;
+      values.calle = this.form.value.calle;
       this.datos.emit(values);
     }
   }

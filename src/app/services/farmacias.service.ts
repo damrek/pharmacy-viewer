@@ -32,9 +32,9 @@ export class FarmaciasService {
     return this._http.get(url);
   }
 
-  getFarmacias(tipo: string = 'todos', rows: string = '25', fecha: string = '', nombre: string = '') {
+  getFarmacias(tipo: string = 'todos', rows: string = '25', fecha: string = '', nombre: string = '', calle: string = '') {
 
-    return this.getQueryFarmacias(`tipo=${tipo}&rows=${rows}&title=*${nombre}*&fecha=${fecha}`).pipe(map((data: Objeto) => data.result));
+    return this.getQueryFarmacias(`tipo=${tipo}&rows=${rows}&title=*${nombre}*&fecha=${fecha}&calle=*${calle}*`).pipe(map((data: Objeto) => data.result));
 
   }
 

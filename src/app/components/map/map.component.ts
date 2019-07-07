@@ -76,7 +76,8 @@ export class MapComponent implements OnInit {
             })
           }
         );
-        newMarker.bindPopup('<p>' + JSON.stringify(f) + '</p>', { autoPan: true });
+        newMarker.bindPopup('<p><strong>' + f.title.substring(9) + '</strong></p><p>' + f.calle + '</p><p>' + f.telefonos + '</p>'
+          + '</p><p>' + f.horario + '</p>' + '</p><p>' + f.descripcion + '</p>', { autoPan: true });
         this.markers.push(newMarker);
       }
     });

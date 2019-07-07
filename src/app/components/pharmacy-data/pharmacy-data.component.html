@@ -37,8 +37,8 @@
   </clr-dg-row>
 
   <clr-dg-footer>
-    <clr-dg-pagination #pagination [clrDgPageSize]="10">
-      <clr-dg-page-size [clrPageSizeOptions]="[5,10,15,30]">Farmacias por página</clr-dg-page-size>
+    <clr-dg-pagination #pagination [clrDgPageSize]="5">
+      <clr-dg-page-size [clrPageSizeOptions]="[5,10,15,30,100]">Farmacias por página</clr-dg-page-size>
       {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
       de {{pagination.totalItems}} farmacias
     </clr-dg-pagination>

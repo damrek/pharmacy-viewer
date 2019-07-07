@@ -8,6 +8,7 @@ interface Datos {
   tipo: string;
   registros: string;
   fecha: string;
+  calle: string;
 }
 
 @Component({
@@ -27,6 +28,7 @@ export class PharmacyDataComponent implements OnInit {
   tipo: string = 'todos';
   totalrows: string = '25';
   fecha: string;
+  calle: string = '';
 
   constructor(private farmaciasService: FarmaciasService,
     private mapService: MapService) { }
@@ -38,7 +40,8 @@ export class PharmacyDataComponent implements OnInit {
   private onSubmit(data: Datos) {
     if (this.tipo !== data.tipo || this.totalrows !== data.registros
       || this.fecha !== data.fecha
-      || this.nombre !== data.title) {
+      || this.nombre !== data.title
+      || this.calle !== data.calle) {
       this.totalrows = data.registros;
       if (data.tipo === '') {
         data.tipo = 'todos';
@@ -51,6 +54,7 @@ export class PharmacyDataComponent implements OnInit {
       }
       this.fecha = hoy;
       this.nombre = data.title;
+      this.calle = data.calle;
       this.loading = true;
       this.load();
     }
@@ -58,7 +62,7 @@ export class PharmacyDataComponent implements OnInit {
 
 
   private load(): void {
-    this.farmaciasService.getFarmacias(this.tipo, this.totalrows, this.fecha, this.nombre).subscribe(data => {
+    this.farmaciasService.getFarmacias(this.tipo, this.totalrows, this.fecha, this.nombre, this.calle).subscribe(data => {
       this.lstFarmacias = [];
       this.selected = [];
       this.lstFarmacias = data;

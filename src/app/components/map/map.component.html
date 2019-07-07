@@ -1,6 +1,5 @@
 <div style="height:95%">
     <button [className]="markers.length > 0 ? 'btn btn-primary btn-sm' : 'btn btn-primary btn-sm disabled'" (click)="limpiarFarmacias()" type="button">Limpiar Mapa</button>
-    <button [className]="markers.length > 0 ? 'btn btn-primary btn-sm' : 'btn btn-primary btn-sm disabled'" (click)="generarMapaCalor()" type="button">Generar Mapa de calor</button>
     <div class="map" leaflet [leafletOptions]="options" [leafletLayersControl]="layersControl" [leafletLayers]="markers"
         (leafletMapReady)="onMapReady($event)">
     </div>
