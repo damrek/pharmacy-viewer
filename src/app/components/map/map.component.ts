@@ -3,6 +3,7 @@ import { latLng, Layer, marker, icon, tileLayer } from 'leaflet';
 import { FarmaciasService } from './../../services/farmacias.service';
 import { MapService } from 'src/app/services/map.service';
 import { Result } from 'src/app/services/models';
+import { Map } from 'leaflet';
 
 @Component({
   selector: 'app-map',
@@ -50,7 +51,7 @@ export class MapComponent implements OnInit {
     setTimeout(() => {
       map.invalidateSize();
     }, 0);
-
+    map.addLayer(this.streetMaps);
     map.on('click', <LeafletMouseEvent>(e) => { console.log(e.latlng) });
   }
 
