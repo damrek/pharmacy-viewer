@@ -23,7 +23,7 @@ export class MapComponent implements OnInit {
   });
   wMaps = tileLayer('http://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
     detectRetina: true,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">Wikimedia</a> contributors'
   });
 
   // Layers control object with our two base layers and the three overlay layers
@@ -77,9 +77,9 @@ export class MapComponent implements OnInit {
         );
         newMarker.bindPopup('<p><strong>' + f.title.substring(9) + '</strong></p><p>' + f.calle + '</p><p>' + f.telefonos + '</p>'
           + '</p><p>' + f.horario + '</p>' + '</p><p>' + f.descripcion + '</p>', { autoPan: true });
-        newMarker.on('mouseover', function (e) {
-          this.openPopup();
-        });
+        // newMarker.on('mouseover', function (e) {
+        //   this.openPopup();
+        // });
         this.markers.push(newMarker);
       }
     });

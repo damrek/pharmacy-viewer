@@ -1,27 +1,34 @@
-# PruebaAytozgz
+# Pharmacy-Viewer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.2.
+## Table of Contents
++ [About](#about)
++ [Getting Started](#getting_started)
++ [Usage](#usage)
 
-## Development server
+## About <a name = "about"></a>
+Pharmacy viewer is a educational purpose project made with [Angular 8](https://angular.io/), [ngx-Leaflet](https://github.com/Asymmetrik/ngx-leaflet) and [Clarity UI Library](https://clarity.design/).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+It makes use of [API Rest Zaragoza](https://www.zaragoza.es/sede/portal/datos-abiertos/api) city data.
 
-## Code scaffolding
+The viewer lets filter available pharmacies by name, street and state through api calls.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![Viewer Screenshot](https://i.imgur.com/zkK7LMv.jpg)
 
-## Build
+## Getting Started <a name = "getting_started"></a>
+Follow these instructions.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Prerequisites
 
-## Running unit tests
+You need node, npm and Angular CLI.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Installing
 
-## Running end-to-end tests
+Make sure of install all npm dependencies:
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+npm install
 
-## Further help
+## Usage <a name = "usage"></a>
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Make sure of getting server running at localhost:4200
+
+ng serve
