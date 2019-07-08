@@ -3,7 +3,6 @@ import { latLng, Layer, marker, icon, tileLayer } from 'leaflet';
 import { FarmaciasService } from './../../services/farmacias.service';
 import { MapService } from 'src/app/services/map.service';
 import { Result } from 'src/app/services/models';
-import { Map } from 'leaflet';
 
 @Component({
   selector: 'app-map',
@@ -14,7 +13,6 @@ import { Map } from 'leaflet';
 export class MapComponent implements OnInit {
   lstFarmacias: Array<Result> = [];
   markers: Layer[] = [];
-  total: number;
 
   constructor(private farmaciasService: FarmaciasService,
     private mapService: MapService) { }
@@ -79,6 +77,9 @@ export class MapComponent implements OnInit {
         );
         newMarker.bindPopup('<p><strong>' + f.title.substring(9) + '</strong></p><p>' + f.calle + '</p><p>' + f.telefonos + '</p>'
           + '</p><p>' + f.horario + '</p>' + '</p><p>' + f.descripcion + '</p>', { autoPan: true });
+        newMarker.on('mouseover', function (e) {
+          this.openPopup();
+        });
         this.markers.push(newMarker);
       }
     });
